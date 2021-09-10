@@ -30,7 +30,30 @@ var searchHistoryHandler = function (event) {
   }
 };
 
-var confirmLocationHandler = function (event) {};
+var confirmLocationHandler = function (event) {
+  event.preventDefault();
+  var confirmedLocation;
+  var radioButtons = document.getElementsByName("search-result");
+  for (var i = 0; i < radioButtons.length; i++) {
+    if (radioButtons[i].checked) {
+      confirmedLocation = JSON.parse(
+        radioButtons[i].getAttribute("data-location")
+      );
+    }
+  }
+  if (confirmedLocation) {
+    UIkit.modal("#confirm-location-modal").hide();
+    saveLocation(confirmedLocation);
+    getWeather(confirmedLocation.latLng);
+    confirmLocationModal
+      .querySelector("#confirm-location-form-message")
+      .classList.remove("uk-text-primary");
+  } else {
+    confirmLocationModal
+      .querySelector("#confirm-location-form-message")
+      .classList.add("uk-text-primary");
+  }
+};
 
 searchButton.addEventListener("click", searchButtonHandler);
 searchHistoryItems.addEventListener("click", searchHistoryHandler);
