@@ -12,7 +12,6 @@ var clearHistory = document.getElementById("clear-btn");
 var displayName;
 var searchTerms = [];
 var searchHistory = [];
-var apikey = config.OpenWeatherAPI;
 
 // display the location
 var defineDisplayName = function (location) {
@@ -135,13 +134,13 @@ var getCoordinates = function (searchTerm) {
 
 // api call to get weather based on set coord lat:x and lng:y
 var getWeather = function (coords) {
+  // var api_key = config.SECRET_API_KEY;
   var weatherApiUrl =
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
     coords.lat +
     "&lon=" +
     coords.lng +
-    "&units=imperial&exclude=minutely,hourly&appid=" +
-    apikey;
+    "&units=imperial&exclude=minutely,hourly&appid=f01c0425c991377d624e271e69ef329d";
   fetch(weatherApiUrl).then(function (res) {
     if (res.ok) {
       res.json().then(function (data) {
