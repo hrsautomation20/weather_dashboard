@@ -12,6 +12,7 @@ var clearHistory = document.getElementById("clear-btn");
 var displayName;
 var searchTerms = [];
 var searchHistory = [];
+var apikey = config.OpenWeatherAPI;
 
 // display the location
 var defineDisplayName = function (location) {
@@ -139,7 +140,8 @@ var getWeather = function (coords) {
     coords.lat +
     "&lon=" +
     coords.lng +
-    "&units=imperial&exclude=minutely,hourly&appid=f01c0425c991377d624e271e69ef329d";
+    "&units=imperial&exclude=minutely,hourly&appid=" +
+    apikey;
   fetch(weatherApiUrl).then(function (res) {
     if (res.ok) {
       res.json().then(function (data) {
